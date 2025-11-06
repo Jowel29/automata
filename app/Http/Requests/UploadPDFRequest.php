@@ -22,10 +22,11 @@ class UploadPDFRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'pdfs' => 'required',
-            'pdfs.*' => 'mimes:pdf|max:20480', // 20MB
+            'pdfs' => 'required|array|min:1',
+            'pdfs.*' => 'required|file|mimes:pdf|max:20480',
         ];
     }
+
     public function messages(): array
     {
         return [

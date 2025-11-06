@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 
 class PDFService
 {
@@ -13,7 +12,7 @@ class PDFService
 
         foreach ($pdfs as $pdf) {
             /** @var UploadedFile $pdf */
-            $filename = time() . '_' . $pdf->getClientOriginalName();
+            $filename = time().'_'.$pdf->getClientOriginalName();
             $pdf->storeAs('public/pdf', $filename);
             $savedFiles[] = $filename;
         }

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "resources/views/pdf/fields.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1762470720238,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1762470720238,
+            "name": "Commit-0",
+            "content": "@extends('layouts.app')\n\n@section('content')\n<div class=\"container\">\n    <h2 class=\"mb-4\">Define Fields to Extract</h2>\n\n    @if(session('uploaded_pdfs'))\n        <p>Uploaded PDFs:</p>\n        <ul>\n            @foreach (session('uploaded_pdfs') as $pdf)\n                <li>{{ $pdf['original_name'] }} ({{ $pdf['size'] }} bytes)</li>\n            @endforeach\n        </ul>\n    @endif\n\n    <form action=\"{{ route('pdf.extract') }}\" method=\"POST\">\n        @csrf\n\n        <div id=\"fields-container\">\n            <div class=\"field-item mb-3\">\n                <input type=\"text\" name=\"fields[0][name]\" placeholder=\"Field Name (e.g., Title)\" class=\"form-control mb-2\" required>\n                <input type=\"text\" name=\"fields[0][start_keyword]\" placeholder=\"Start Keyword (e.g., Title:)\" class=\"form-control mb-2\">\n                <input type=\"text\" name=\"fields[0][end_keyword]\" placeholder=\"End Keyword (optional)\" class=\"form-control\">\n            </div>\n        </div>\n\n        <button type=\"button\" id=\"add-field\" class=\"btn btn-secondary mt-2\">+ Add Field</button>\n        <button type=\"submit\" class=\"btn btn-primary mt-2\">Extract Data</button>\n    </form>\n</div>\n\n<script>\n    let fieldIndex = 1;\n    document.getElementById('add-field').addEventListener('click', () => {\n        const container = document.getElementById('fields-container');\n        const div = document.createElement('div');\n        div.classList.add('field-item', 'mb-3');\n        div.innerHTML = `\n            <input type=\"text\" name=\"fields[${fieldIndex}][name]\" placeholder=\"Field Name\" class=\"form-control mb-2\" required>\n            <input type=\"text\" name=\"fields[${fieldIndex}][start_keyword]\" placeholder=\"Start Keyword\" class=\"form-control mb-2\">\n            <input type=\"text\" name=\"fields[${fieldIndex}][end_keyword]\" placeholder=\"End Keyword (optional)\" class=\"form-control\">\n        `;\n        container.appendChild(div);\n        fieldIndex++;\n    });\n</script>\n@endsection\n"
+        }
+    ]
+}

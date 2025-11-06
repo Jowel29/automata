@@ -4,14 +4,14 @@
 <div class="container">
     <h2 class="mb-4">Define Fields to Extract</h2>
 
-
-    <p>Uploaded PDFs:</p>
-    <ul>
-        @foreach ($uploadedPdfs as $pdf)
-            <li>{{ $pdf }}</li>
-        @endforeach
-    </ul>
-
+    @if(session('uploaded_pdfs'))
+        <p>Uploaded PDFs:</p>
+        <ul>
+            @foreach (session('uploaded_pdfs') as $pdf)
+                <li>{{ $pdf['original_name'] }} ({{ $pdf['size'] }} bytes)</li>
+            @endforeach
+        </ul>
+    @endif
 
     <form action="{{ route('pdf.extract') }}" method="POST">
         @csrf

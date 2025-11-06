@@ -1,0 +1,26 @@
+{
+    "sourceFile": "app/Http/Requests/UploadPDFRequest.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1762469495253,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1762469504152,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,12 +20,15 @@\n      * @return array<string, \\Illuminate\\Contracts\\Validation\\ValidationRule|array<mixed>|string>\n      */\n     public function rules(): array\n     {\n-        return [\n-            'pdfs' => 'required',\n-            'pdfs.*' => 'mimes:pdf|max:20480', // 20MB\n-        ];\n+        public function rules(): array\n+{\n+    return [\n+        'pdfs' => 'required|array|min:1', // Add array validation\n+        'pdfs.*' => 'required|file|mimes:pdf|max:20480',\n+    ];\n+}\n     }\n     public function messages(): array\n     {\n         return [\n"
+                },
+                {
+                    "date": 1762469512470,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,15 +20,12 @@\n      * @return array<string, \\Illuminate\\Contracts\\Validation\\ValidationRule|array<mixed>|string>\n      */\n     public function rules(): array\n     {\n-        public function rules(): array\n-{\n-    return [\n-        'pdfs' => 'required|array|min:1', // Add array validation\n-        'pdfs.*' => 'required|file|mimes:pdf|max:20480',\n-    ];\n-}\n+        return [\n+            'pdfs' => 'required|array|min:1', // Add array validation\n+            'pdfs.*' => 'required|file|mimes:pdf|max:20480',\n+        ];\n     }\n     public function messages(): array\n     {\n         return [\n"
+                }
+            ],
+            "date": 1762469495253,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Requests;\n\nuse Illuminate\\Foundation\\Http\\FormRequest;\n\nclass UploadPDFRequest extends FormRequest\n{\n    /**\n     * Determine if the user is authorized to make this request.\n     */\n    public function authorize(): bool\n    {\n        return true;\n    }\n\n    /**\n     * Get the validation rules that apply to the request.\n     *\n     * @return array<string, \\Illuminate\\Contracts\\Validation\\ValidationRule|array<mixed>|string>\n     */\n    public function rules(): array\n    {\n        return [\n            'pdfs' => 'required',\n            'pdfs.*' => 'mimes:pdf|max:20480', // 20MB\n        ];\n    }\n    public function messages(): array\n    {\n        return [\n            'pdfs.required' => 'You must select at least one PDF file.',\n            'pdfs.*.mimes' => 'Only PDF files are allowed.',\n            'pdfs.*.max' => 'Each PDF must not exceed 20 MB.',\n        ];\n    }\n}"
+        }
+    ]
+}

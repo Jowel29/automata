@@ -1,0 +1,22 @@
+{
+    "sourceFile": "app/Http/Controllers/ExcelController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1762469581934,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1762469588585,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,17 +26,14 @@\n \n         $callback = function () use ($data) {\n             $file = fopen('php://output', 'w');\n \n-            // Add BOM for Excel UTF-8 support\n             fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));\n \n-            // Write headers\n             if (!empty($data)) {\n                 fputcsv($file, array_keys($data[0]));\n             }\n \n-            // Write data\n             foreach ($data as $row) {\n                 fputcsv($file, $row);\n             }\n \n"
+                }
+            ],
+            "date": 1762469581934,
+            "name": "Commit-0",
+            "content": "<?php\nnamespace App\\Http\\Controllers;\n\nuse Illuminate\\Support\\Facades\\Response;\n\nclass ExcelController extends Controller\n{\n    public function downloadExcel()\n    {\n        $data = session('extracted_data', []);\n\n        if (empty($data)) {\n            return redirect()->back()\n                ->with('error', 'No data to export.');\n        }\n\n        $filename = 'extracted_data_' . date('Y-m-d_His') . '.csv';\n\n        $headers = [\n            'Content-Type' => 'text/csv; charset=UTF-8',\n            'Content-Disposition' => \"attachment; filename=\\\"$filename\\\"\",\n            'Pragma' => 'no-cache',\n            'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',\n            'Expires' => '0',\n        ];\n\n        $callback = function () use ($data) {\n            $file = fopen('php://output', 'w');\n\n            // Add BOM for Excel UTF-8 support\n            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));\n\n            // Write headers\n            if (!empty($data)) {\n                fputcsv($file, array_keys($data[0]));\n            }\n\n            // Write data\n            foreach ($data as $row) {\n                fputcsv($file, $row);\n            }\n\n            fclose($file);\n        };\n\n        return response()->stream($callback, 200, $headers);\n    }\n}"
+        }
+    ]
+}

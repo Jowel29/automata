@@ -1,0 +1,18 @@
+{
+    "sourceFile": "resources/views/pdf/results.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1762470733777,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1762470733777,
+            "name": "Commit-0",
+            "content": "@extends('layouts.app')\n\n@section('content')\n<div class=\"container\">\n    <h2 class=\"mb-4\">Extracted Data</h2>\n\n    @if(empty($extractedData) || count($extractedData) === 0)\n        <div class=\"alert alert-warning\">No data extracted yet.</div>\n    @else\n        <table class=\"table table-bordered\">\n            <thead>\n                <tr>\n                    @foreach (array_keys($extractedData[0]) as $header)\n                        <th>{{ ucfirst($header) }}</th>\n                    @endforeach\n                </tr>\n            </thead>\n            <tbody>\n                @foreach ($extractedData as $row)\n                    <tr>\n                        @foreach ($row as $cell)\n                            <td>{{ $cell }}</td>\n                        @endforeach\n                    </tr>\n                @endforeach\n            </tbody>\n        </table>\n\n        <a href=\"{{ route('pdf.export') }}\" class=\"btn btn-success mt-3\">Export to CSV</a>\n    @endif\n</div>\n@endsection\n"
+        }
+    ]
+}
