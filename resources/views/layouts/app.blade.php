@@ -228,6 +228,32 @@
             color: #64748b;
         }
 
+        .file-path {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            font-style: italic;
+        }
+
+        .file-remove {
+            background: none;
+            border: none;
+            color: var(--danger);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .file-remove:hover {
+            background: #fee2e2;
+            transform: rotate(90deg);
+        }
+
         .field-item {
             background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
             border-radius: 16px;
@@ -364,6 +390,18 @@
             color: white;
         }
 
+        .btn-warning-modern {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-warning-modern:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(245, 158, 11, 0.4);
+            color: white;
+        }
+
         .modern-table {
             border-radius: 16px;
             overflow: hidden;
@@ -460,6 +498,54 @@
         }
 
         .template-desc {
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+
+        .export-options {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 2px solid var(--border);
+        }
+
+        .export-option {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .export-option:hover {
+            background: white;
+            border-color: var(--primary);
+        }
+
+        .export-option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .export-option label {
+            cursor: pointer;
+            flex: 1;
+            margin: 0;
+        }
+
+        .export-option-title {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .export-option-desc {
             font-size: 0.875rem;
             color: #64748b;
         }

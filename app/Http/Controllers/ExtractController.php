@@ -75,12 +75,23 @@ class ExtractController extends Controller
                 $extractedData[] = $pdfResult;
 
             } catch (\Exception $e) {
-                \Log::error('PDF Extraction Error: '.$e->getMessage());
                 $extractedData[] = $this->createErrorRow($originalName, 'Error: '.$e->getMessage(), $fields);
             }
         }
 
         session(['extracted_data' => $extractedData]);
+
+        return redirect()->route('pdf.results');
+    }
+
+    public function showResults()
+    {
+        $extractedData = session('extracted_data', []);
+
+        if (empty($extractedData)) {
+            return redirect()->route('pdf.fields')
+                ->with('error', 'No extracted data found. Please extract data first.');
+        }
 
         return view('pdf.results', compact('extractedData'));
     }

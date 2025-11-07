@@ -10,7 +10,8 @@
     @if(session('uploaded_pdfs'))
         <div class="file-list mb-4">
             <h5 style="font-weight: 700; color: var(--dark); margin-bottom: 1rem;">
-                <i class="fas fa-check-circle" style="color: var(--success);"></i> Uploaded Files
+                <i class="fas fa-check-circle" style="color: var(--success);"></i> 
+                Uploaded Files ({{ count(session('uploaded_pdfs')) }})
             </h5>
             @foreach(session('uploaded_pdfs') as $pdf)
                 <div class="file-item">
@@ -92,7 +93,7 @@
         const div = document.createElement('div');
         div.className = 'field-item';
         div.setAttribute('data-index', fieldIndex);
-
+        
         div.innerHTML = `
             <div class="field-header">
                 <div class="field-number">${fieldIndex + 1}</div>
@@ -115,7 +116,7 @@
                 </div>
             </div>
         `;
-
+        
         container.appendChild(div);
         fieldIndex++;
     });
